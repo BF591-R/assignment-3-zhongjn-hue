@@ -233,11 +233,11 @@ this plot.
 ```{r boxplot from long format data using ggplot2, echo=FALSE}
 library(ggplot2)
 gene_order <- long_format_data %>%
-  dplyr::distinct(hgnc_symbol, gene_set) %>%
+  dplyr::distinct(hgnc, gene_set) %>%
   dplyr::arrange(desc(gene_set)) %>%  
-  dplyr::pull(hgnc_symbol)
+  dplyr::pull(hgnc)
 
-ggplot(long_format_data, aes(x = factor(hgnc_symbol, levels = gene_order), y = value, fill = gene_set)) +
+ggplot(long_format_data, aes(x = factor(hgnc, levels = gene_order), y = value, fill = gene_set)) +
   geom_boxplot() +
   scale_fill_manual(values = c("bad" = "#E07B6A", "good" = "#6BBDBC")) +
   labs(

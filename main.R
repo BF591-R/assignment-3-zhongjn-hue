@@ -161,8 +161,9 @@ reduce_data <- function(expr_tibble, names_ids, good_genes, bad_genes){
 #' @examples
 convert_to_long <- function(tibble) {
   long_tbl <- tibble %>%
+    dplyr::rename_with(~ ifelse(. == "hgnc_symbol", "hgnc", .)) %>% 
     tidyr::pivot_longer(
-      cols = -c(probe, hgnc_symbol, gene_set),
+      cols = -c(probe, hgnc, gene_set),
       names_to = "sample",
       values_to = "value"
     )
