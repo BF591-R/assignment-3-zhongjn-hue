@@ -76,14 +76,14 @@ describe("reduce_data()", {
 describe("convert_to_long()", {
   # wide format tibble
   wide_tib <- tibble(probe = c("202274_at", "202541_at", "202542_s_at", "203919_at"),
-                     hgnc = c("ACTG2", "AIMP1", "AIMP1", "TCEA2"),
+                     hgnc_symbol = c("ACTG2", "AIMP1", "AIMP1", "TCEA2"),
                      gene_set = rep("good", 4),
                      GSM1 = c(8.05, 8.40, 9.55, 4.44),
                      GSM2 = c(7.74, 7.11, 8.48, 5.39))
   
   # expected long format tibble
   expected_tib <- tibble(probe = rep(c("202274_at", "202541_at", "202542_s_at", "203919_at"), each = 2),
-                         hgnc = rep(c("ACTG2", "AIMP1", "AIMP1", "TCEA2"), each = 2),
+                         hgnc_symbol = rep(c("ACTG2", "AIMP1", "AIMP1", "TCEA2"), each = 2),
                          gene_set = rep(rep("good", 4), each = 2),
                          sample = rep(c("GSM1", "GSM2"), 4),
                          value = c(8.05, 7.74, 8.40, 7.11, 9.55, 8.48, 4.44, 5.39))

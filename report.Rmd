@@ -1,7 +1,7 @@
 ---
-title: "Assignment Bioinformatics Basics Report"
-author: "Taylor Falk"
-date: "11/17/2021"
+title: "Assignm ent Bioinformatics Basics Report"
+author: "Jining Zhong"
+date: "02/18/2026"
 output: html_document
 ---
 
@@ -232,6 +232,20 @@ do *not* need to do this in a function, use the space provided below to create
 this plot. 
 ```{r boxplot from long format data using ggplot2, echo=FALSE}
 library(ggplot2)
+gene_order <- long_format_data %>%
+  dplyr::distinct(hgnc_symbol, gene_set) %>%
+  dplyr::arrange(desc(gene_set)) %>%  
+  dplyr::pull(hgnc_symbol)
 
-
+ggplot(long_format_data, aes(x = factor(hgnc_symbol, levels = gene_order), y = value, fill = gene_set)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("bad" = "#E07B6A", "good" = "#6BBDBC")) +
+  labs(
+    title = "These genes were picked randomly, don't expect to see a pattern",
+    x = "Gene Set",
+    y = "Expression Value",
+    fill = "gene_set"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
